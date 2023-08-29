@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('dealerName');
             $table->boolean('gender');
             $table->string('phoneNumber');
-            $table->dateTime('dateOfBirth');
+            $table->date('dateOfBirth');
             $table->text('country');
             $table->text('specificAddress');
             $table->text('businessItem');

@@ -25,8 +25,8 @@ Route::prefix('admin')->group(function(){
         Route::DELETE('delete',[DealerController::class,'delete']);
         Route::get('add',[DealerController::class,'create']);
         Route::post('add/store',[DealerController::class,'store']);
-        Route::get('edit/{sinhvien}',[DealerController::class,'edit']);
-        Route::post('edit/{sinhvien}',[DealerController::class,'postedit']);
+        Route::get('edit/{dealer}',[DealerController::class,'edit']);
+        Route::post('edit/{dealer}',[DealerController::class,'postedit']);
     });
 });
 

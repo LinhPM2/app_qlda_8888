@@ -122,7 +122,7 @@
 
     function getList() {
         $.ajax({
-            url: "/Dealer/getList",
+            url: "/admin/dealer/getList",
             method: "GET",
             data: { searchValue,typeSearch,orderType,orderBy,currentPage,pageSize},
             success: function (result) {
@@ -160,10 +160,10 @@
                         <td class ='MSSV'>" + listData[i - ci - 1].dateOfBirth + "</td>\
                         <td class ='MSSV'>" + listData[i - ci - 1].country + "</td>\
                         <td class ='MSSV'>" + listData[i - ci - 1].specificAddress + "</td>\
-                        <td class ='MSSV'>" + listData[i - ci - 1].bussinessItem + "</td>\
+                        <td class ='MSSV'>" + listData[i - ci - 1].businessItem + "</td>\
                         <td>\
-                        <a href=\"/admin/lophocphan/edit/"+ listData[i - ci - 1].id + "\"class=\"btn btn-primary mr-2\"><i class=\"fas fa-edit\"></i></a>\
-                        <button onclick=\"DeleteLop("+listData[i - ci - 1].id+",'/admin/lophocphan/delete')\" class=\"btn btn-danger\"><i class=\"fas fa-trash\"></i></button>\
+                        <a href=\"/admin/dealer/edit/"+ listData[i - ci - 1].id + "\"class=\"btn btn-primary mr-2\"><i class=\"fas fa-edit\"></i></a>\
+                        <button onclick=\"DeleteDealer("+listData[i - ci - 1].id+",'/admin/dealer/delete')\" class=\"btn btn-danger\"><i class=\"fas fa-trash\"></i></button>\
                     </td>\
                         ";
                 }

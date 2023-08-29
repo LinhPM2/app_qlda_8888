@@ -15,6 +15,6 @@
   <!-- Toastr  -->
   <link rel="stylesheet" href="/theme/plugins/toastr/toastr.min.css">
 
-  <script src="/ckeditor/ckeditor.js"></script>
+  <!-- <script src="/ckeditor/ckeditor.js"></script> -->
 
 </head>

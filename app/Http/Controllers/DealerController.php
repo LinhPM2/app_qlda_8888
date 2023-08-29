@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateDealerRequest;
+use App\Http\Service\DealerService;
 use App\Models\dealer;
 use Illuminate\Http\Request;
 
 class DealerController extends Controller
 {
-    
+    protected $dealerService;
 
+    public function __construct(DealerService $dealerService){
+        $this->dealerService = $dealerService;
+    }
     public function index(){
         return view('admin.dealer.list',[
             'title' => 'Danh sách Đại lý'
@@ -61,5 +66,34 @@ class DealerController extends Controller
         ]);
     }
 
-    
+    public function store(CreateDealerRequest $request){
+        $result = $this->dealerService->create($request);
+        return redirect()->back();
+    }
+
+    public function delete(Request $request){
+        $result = $this->dealerService->delete($request);
+        if($result) {
+            return response()->json([
+                'error'=>'false',
+                'message'=>'xóa thành công'
+            ]);
+        }
+
+        return response()->json([
+            'error'=>'true'
+        ]);
+    }
+
+    public function edit(dealer $dealer){
+        return view('admin.dealer.edit',[
+            'title'=>'Sửa thông tin đại lý',
+            'dealer'=>$dealer,
+        ]);
+    }
+
+    public function postedit(dealer $dealer,CreateDealerRequest $request){
+        $result = $this->dealerService->edit($request,$dealer);
+        return redirect()->back();
+    }
 }

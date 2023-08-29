@@ -36,11 +36,10 @@
             </div>
 
             <div class="form-group">
-                <label for="bussinessItem">Mặt hàng kinh doanh:</label>
-                <input type="text" name="bussinessItem" class="form-control" id="bussinessItem" placeholder="Nhập Mặt hàng kinh doanh">
+                <label for="businessItem">Mặt hàng kinh doanh:</label>
+                <input type="text" name="businessItem" class="form-control" id="bussinessItem" placeholder="Nhập Mặt hàng kinh doanh">
             </div>
         </div>
-        <!-- /.card-body -->
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
