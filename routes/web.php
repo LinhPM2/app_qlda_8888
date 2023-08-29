@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DealerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')->group(function(){
+    Route::prefix('dealer')->group(function(){
+        Route::get('list',[DealerController::class,'index'])->name('dealer');
+        Route::get('getList',[DealerController::class,'getList']);
+        Route::DELETE('delete',[DealerController::class,'delete']);
+        Route::get('add',[DealerController::class,'create']);
+        Route::post('add/store',[DealerController::class,'store']);
+        Route::get('edit/{sinhvien}',[DealerController::class,'edit']);
+        Route::post('edit/{sinhvien}',[DealerController::class,'postedit']);
+    });
+});
+
