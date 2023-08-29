@@ -9,9 +9,12 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index()
-    {
+    {   if (Auth::check()) {
+        return redirect()->intended(route('admin'));
+        }
         return view('auth.login',['title'=>'Trang đăng nhập']);
     }
+
     public function store(Request $request)
     {
         $this->validateWithBag('login',$request, [
@@ -22,10 +25,10 @@ class LoginController extends Controller
         if (Auth::attempt([
             'email' => $request->input('email'),
             'password' => $request->input('password')
-        ])) {
-            //echo "đăng nhập thành công";
+        ], true)) {
             session()->flash('success', 'Logged in');
-            return redirect()->route('admin');
+            $request->session()->regenerate();
+            return redirect()->intended(route('admin'));
         }
         Session()->flash('error', 'Tên đăng nhập hoặc mật khẩu không chính xác');
         return back()->withErrors([

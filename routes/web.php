@@ -1,10 +1,8 @@
 <?php
 
-<<<<<<< HEAD
 use  App\Http\Controllers\Auth\LoginController;
-=======
 use App\Http\Controllers\DealerController;
->>>>>>> 8ba67facf571e0867e019ec3cfab730109ea829e
+use App\Http\Controllers\MainScreenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,24 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-<<<<<<< HEAD
-Route::get('/login',[LoginController::class,'index'])->name('login');
-Route::post('/login/store',[LoginController::class,'store']);
-=======
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
-
-Route::prefix('admin')->group(function(){
-    Route::prefix('dealer')->group(function(){
-        Route::get('list',[DealerController::class,'index'])->name('dealer');
-        Route::get('getList',[DealerController::class,'getList']);
-        Route::DELETE('delete',[DealerController::class,'delete']);
-        Route::get('add',[DealerController::class,'create']);
-        Route::post('add/store',[DealerController::class,'store']);
-        Route::get('edit/{sinhvien}',[DealerController::class,'edit']);
-        Route::post('edit/{sinhvien}',[DealerController::class,'postedit']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login/store', [LoginController::class, 'store']);
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/',[MainScreenController::class,'index'])->name('admin');
+        Route::prefix('dealer')->group(function () {
+            Route::get('list', [DealerController::class, 'index'])->name('dealer');
+            Route::get('getList', [DealerController::class, 'getList']);
+            Route::DELETE('delete', [DealerController::class, 'delete']);
+            Route::get('add', [DealerController::class, 'create']);
+            Route::post('add/store', [DealerController::class, 'store']);
+            Route::get('edit/{sinhvien}', [DealerController::class, 'edit']);
+            Route::post('edit/{sinhvien}', [DealerController::class, 'postedit']);
+        });
     });
 });
-
->>>>>>> 8ba67facf571e0867e019ec3cfab730109ea829e

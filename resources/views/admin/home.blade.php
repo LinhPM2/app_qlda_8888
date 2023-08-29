@@ -1,4 +1,4 @@
 @extends('admin.main')
 @section('content')
-    đây là phần nội dung
+    @yield('pageContent')
 @endsection
