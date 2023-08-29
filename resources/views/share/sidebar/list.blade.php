@@ -1,10 +1,12 @@
 @foreach ($list as $key )
-<li class="nav-item">
-    <a href="/admin/dealer/list/" class="nav-link">
-        <i class="nav-icon fas fa-solid fa-bars"></i>
-        <p>
-            {{$key->name}}
-        </p>
-    </a>
-</li>
+    @unless ($key->allowUser && (strtolower(Auth::user()->roles) == 'user'))
+        <li class="nav-item">
+            <a href={{$key->path}} class="nav-link">
+                <i class="{{$key->icon}}"></i>
+                <p>
+                    {{$key->name}}
+                </p>
+            </a>
+        </li>
+    @endunless
 @endforeach

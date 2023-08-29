@@ -9,7 +9,7 @@ class SidebarComposer
 {
     public $tabs = [];
     public function __construct()
-    {
+    {   
         $this->tabs = [
             new SidebarTabs("Quản lý Đại lý", "/admin/dealer/list"),
         ];
