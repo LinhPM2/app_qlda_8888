@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index()
-    {   
+    {
         return view('auth.login',['title'=>'Trang đăng nhập']);
     }
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $this->validateWithBag('login',$request, [
             'email' => 'required|email:filter',
             'password' => 'required'
         ]);
@@ -28,6 +28,8 @@ class LoginController extends Controller
             return redirect()->route('admin');
         }
         Session()->flash('error', 'Tên đăng nhập hoặc mật khẩu không chính xác');
-        return redirect()->back();
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 }

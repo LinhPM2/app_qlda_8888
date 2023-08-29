@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <meta charset="utf-8">
@@ -323,34 +324,28 @@
 
 <body>
     <div class="content">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 contents">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12">
-                            <div class="form-block">
-                                <div class="mb-4">
-                                    <h3><strong>Tương Ớt CRM 🔥🔥🔥</strong></h3>
-                                </div>
-                                <form action="login/store" method="post">
-                                    <div class="form-group first">
-                                        <input type="text" class="form-control pl-2" id="username"
-                                            placeholder="youremail@hehe.com">
-                                    </div>
-                                    <div class="form-group last mb-4">
-                                        <input type="password" class="form-control pl-2" id="password"
-                                            placeholder="password">
-                                    </div>
-                                    <input type="submit" value="Log In"
-                                        class="btn btn-pill text-white btn-block btn-primary">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="container"><div class="row justify-content-center"><div class="col-md-6 contents"><div class="row justify-content-center"><div class="col-md-12"><div class="form-block">
+            <div class="mb-4">
+                <h3><strong>Tương Ớt CRM 🔥🔥🔥</strong></h3>
             </div>
-        </div>
-    </div>
+            <form action="login/store" method="post">
+                @csrf <!-- {{ csrf_field() }} -->
+                <div class="form-group first">
+                    <input type="text" name="email" placeholder="youremail@hehe.com"
+                        class="form-control pl-2 @error('email', 'login') is-invalid @enderror">
+                    @error('email', 'login')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group last mb-4">
+                    <input type="password" name="password" placeholder="password"
+                        class="form-control pl-2 @error('password', 'login') is-invalid @enderror">
+                    @error('password', 'login')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
+            </form>
+            </div></div></div></div></div></div></div>
 </body>
-
 </html>
