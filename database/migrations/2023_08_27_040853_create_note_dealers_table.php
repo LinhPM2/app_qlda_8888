@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->text('description');
             $table->text('name');
-            $table->dateTime('creationTime');
             $table->unsignedBigInteger('IDDealer');
             $table->foreign('IDDealer')->references('id')->on('dealers');
             $table->timestamps();
