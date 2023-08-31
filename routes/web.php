@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+Route::get('/', fn() => redirect()->route('login'));
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/store', [LoginController::class, 'store']);
-Route::middleware(['auth'])->group(function () {
+
+
+Route::middleware(['auth', 'auth.basic'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/',[MainScreenController::class,'index'])->name('admin');
         Route::prefix('dealer')->group(function () {
