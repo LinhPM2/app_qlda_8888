@@ -7,7 +7,7 @@ use PHPUnit\Exception;
 use DB;
 
 class DealerService
-{
+{   
     public function delete($request)
     {
         $dealer = dealer::where('id', $request->input('id'))->first();
