@@ -63,9 +63,9 @@
     }
 
     .short-text {
-        width: 300px; 
-        white-space: nowrap; 
-        overflow: hidden; 
+        width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
         text-overflow: ellipsis;
     }
 </style>
@@ -166,7 +166,7 @@
                         <td class ='MSSV'>" + listData[i - ci - 1].phoneNumber + "</td>\
                         <td class ='MSSV'>" + listData[i - ci - 1].dateOfBirth + "</td>\
                         <td class ='MSSV'>" + listData[i - ci - 1].country + "</td>\
-                        <td class ='MSSV'><p class='short-text'>" + listData[i - ci - 1].specificAddress + "</p></td>\
+                        <td class ='MSSV'><p class='short-text' title="+listData[i - ci - 1].specificAddress+">" + listData[i - ci - 1].specificAddress + "</p></td>\
                         <td class ='MSSV'>" + listData[i - ci - 1].businessItem + "</td>\
                         <td>\
                         <a href=\"/admin/dealer/edit/"+ listData[i - ci - 1].id + "\"class=\"btn btn-primary mr-2\"><i class=\"fas fa-edit\"></i></a>\
