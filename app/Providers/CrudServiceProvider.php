@@ -6,6 +6,8 @@ use App\Http\Controllers\UserMgt\UserController;
 use App\Http\Service\UserService;
 use App\Interfaces\ICrud;
 use Illuminate\Support\ServiceProvider;
+use IUserRepository;
+use UserRepository;
 
 class CrudServiceProvider extends ServiceProvider
 {
@@ -16,7 +18,7 @@ class CrudServiceProvider extends ServiceProvider
     public function register(): void
     {
         //đăng ký service như thế này
-        $this->assignServices(UserController::class, ICrud::class, UserService::class);
+        $this->assignServices(UserService::class, IUserRepository::class, UserRepository::class);
     }
 
     /**
