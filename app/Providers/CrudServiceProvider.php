@@ -2,16 +2,15 @@
 
 namespace App\Providers;
 
-use App\Http\Controllers\UserMgt\UserController;
+use App\Http\Repositories\UserRepository;
 use App\Http\Service\UserService;
-use App\Interfaces\ICrud;
+use App\Interfaces\IUserRepository;
 use Illuminate\Support\ServiceProvider;
-use IUserRepository;
-use UserRepository;
+
 
 class CrudServiceProvider extends ServiceProvider
 {
-
+    protected $defer = true;
     /**
      * Register services.
      */
@@ -35,10 +34,8 @@ class CrudServiceProvider extends ServiceProvider
      * @param string $implementation service/repository implement từ interface trên
      * @author vdac
      */
-    public function assignServices(string|array $class, string $dependency, string $implementation): void
+    private function assignServices(string|array $class, string $dependency, string $implementation): void
     {
-        $this->app->when($class)->needs($dependency)->give(function () use ($implementation) {
-            return $implementation;
-        });
+        $this->app->when($class)->needs($dependency)->give($implementation);
     }
 }

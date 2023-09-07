@@ -33,10 +33,10 @@ class AuthServiceProvider extends ServiceProvider
             return AuthorizeService::isAdmin();
         });
         Gate::define('admin-activity',function (){
-            return AuthorizeService::isAdmin() ? Response::allow() : Response::denyWithStatus(403);
+            return AuthorizeService::isAdmin() ? Response::allow() : Response::denyWithStatus(403, __('auth.unauthorized'));
         });
         Gate::define('leader-activity',function (){
-            return AuthorizeService::isLeader() ? Response::allow() : Response::denyWithStatus(403);
+            return (AuthorizeService::isLeader() || AuthorizeService::isAdmin()) ? Response::allow() : Response::denyWithStatus(403, __('auth.unauthorized'));
         });
     }
 }
