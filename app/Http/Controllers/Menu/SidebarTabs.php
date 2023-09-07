@@ -7,7 +7,7 @@ class SidebarTabs
     public string $icon;
     public string $name;
     public string $allowUser;
-    public function __construct(string $tabName, string $routePath, string $iconClass = "nav-icon fas fa-solid fa-bars", $allowUser = "USER") {
+    public function __construct(string $tabName, string $routePath,$allowUser = "USER", string $iconClass = "nav-icon fas fa-solid fa-bars") {
         $this->path = $routePath;
         $this->name = $tabName;
         $this->icon = $iconClass;
