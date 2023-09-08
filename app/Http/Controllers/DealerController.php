@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDealerRequest;
-use App\Interfaces\IDealerService;
+use App\Interfaces\Services\IDealerService;
 use App\Models\dealer;
 use Illuminate\Http\Request;
 
 class DealerController extends Controller
 {
-    public function __construct(protected IDealerService $dealerService){
+    public function __construct(private IDealerService $dealerService){
     }
     public function index(){
         return view('admin.dealer.list',[

@@ -2,17 +2,18 @@
 
 namespace App\Http\Service;
 
-use App\Interfaces\IDealerRepository;
-use App\Interfaces\IDealerService;
+use App\Interfaces\Repositories\IDealerRepository;
+use App\Interfaces\Services\IDealerService;
 use App\Models\dealer;
 use PHPUnit\Exception;
 use DB;
 
 class DealerService implements IDealerService
-{   
-    public function __construct(private IDealerRepository $dealerRepo){
+{
+    public function __construct(private IDealerRepository $dealerRepo)
+    {
     }
-public function delete($request)
+    public function delete($request)
     {
         $dealer = dealer::where('id', $request->input('id'))->first();
         if ($dealer) {
@@ -22,26 +23,28 @@ public function delete($request)
         return false;
     }
 
-    public function create($request){
-        try{
+    public function create($request)
+    {
+        try {
             dealer::create([
-                'dealerName'=>(string)$request->input('dealerName'),
-                'gender'=>intval($request->input('gender')),
-                'phoneNumber'=>$request->input('phoneNumber'),
-                'dateOfBirth'=>date($request->input('dateOfBirth')),
-                'country'=>$request->input('country'),
-                'specificAddress'=>$request->input('specificAddress'),
-                'businessItem'=>$request->input('businessItem')
+                'dealerName' => (string)$request->input('dealerName'),
+                'gender' => intval($request->input('gender')),
+                'phoneNumber' => $request->input('phoneNumber'),
+                'dateOfBirth' => date($request->input('dateOfBirth')),
+                'country' => $request->input('country'),
+                'specificAddress' => $request->input('specificAddress'),
+                'businessItem' => $request->input('businessItem')
             ]);
-            Session()->flash('success',"Thêm thành công");
-        }catch(Exception $ex){
-            Session()->flash('error',$ex->getMessage());
+            Session()->flash('success', "Thêm thành công");
+        } catch (Exception $ex) {
+            Session()->flash('error', $ex->getMessage());
             return false;
         }
         return true;
     }
 
-    public function edit($request,$dealer){
+    public function edit($request, $dealer)
+    {
         try {
             $dealer->dealerName = $request->input('dealerName');
             $dealer->gender = $request->input('gender');
@@ -51,10 +54,9 @@ public function delete($request)
             $dealer->specificAddress = $request->input('specificAddress');
             $dealer->businessItem = $request->input('businessItem');
             $dealer->save();
-            Session()->flash('success','Sửa thông tin thành công');
-        }
-        catch (Exception $ex){
-            Session()->flash('error',$ex->getMessage());
+            Session()->flash('success', 'Sửa thông tin thành công');
+        } catch (Exception $ex) {
+            Session()->flash('error', $ex->getMessage());
             return false;
         }
         return true;

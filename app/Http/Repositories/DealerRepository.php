@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Repositories;
-use App\Interfaces\IDealerRepository;
+
+use App\Interfaces\Repositories\IDealerRepository;
 use App\Models\dealer;
 use Exception;
 class DealerRepository implements IDealerRepository
