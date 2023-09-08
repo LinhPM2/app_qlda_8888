@@ -2,13 +2,17 @@
 
 namespace App\Http\Service;
 
+use App\Interfaces\IDealerRepository;
+use App\Interfaces\IDealerService;
 use App\Models\dealer;
 use PHPUnit\Exception;
 use DB;
 
-class DealerService
+class DealerService implements IDealerService
 {   
-    public function delete($request)
+    public function __construct(private IDealerRepository $dealerRepo){
+    }
+public function delete($request)
     {
         $dealer = dealer::where('id', $request->input('id'))->first();
         if ($dealer) {

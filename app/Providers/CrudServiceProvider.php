@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\DealerController;
+use App\Http\Repositories\DealerRepository;
 use App\Http\Repositories\UserRepository;
+use App\Http\Service\DealerService;
 use App\Http\Service\UserService;
+use App\Interfaces\IDealerRepository;
+use App\Interfaces\IDealerService;
 use App\Interfaces\IUserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,6 +23,9 @@ class CrudServiceProvider extends ServiceProvider
     {
         //đăng ký service như thế này
         $this->assignServices(UserService::class, IUserRepository::class, UserRepository::class);
+        $this->assignServices(DealerService::class, IDealerRepository::class, DealerRepository::class);
+        // $this->assignServices(DealerController::class, IDealerService::class, DealerService::class);
+
     }
 
     /**
