@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Service\UserService;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
@@ -14,10 +15,9 @@ class UserController extends Controller
     {
     }
     public function index()
-    {
-        return view("admin.users.index", [
+    {   return view("admin.users.index", [
             "title" => "Users list",
-            "users" => $this->userService->getUserList(),
+            "users" => $this->userService->getUserList()->toJson(),
         ]);
     }
     public function show(string $id)
