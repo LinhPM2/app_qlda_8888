@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/theme/dist/css/adminlte.min.css">
     <!-- Toastr  -->
     <link rel="stylesheet" href="/theme/plugins/toastr/toastr.min.css">
-    <script src="/ckeditor/ckeditor.js"></script>
-
+    <link rel="stylesheet" href="/theme/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/theme/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/theme/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>

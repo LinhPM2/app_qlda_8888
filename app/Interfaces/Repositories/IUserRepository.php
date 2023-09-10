@@ -1,5 +1,5 @@
 <?php
-namespace App\Interfaces;
+namespace App\Interfaces\Repositories;
 use App\Models\User;
 
 interface IUserRepository

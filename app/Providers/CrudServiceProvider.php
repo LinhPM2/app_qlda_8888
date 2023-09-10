@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Repositories\DealerRepository;
 use App\Http\Repositories\UserRepository;
-use App\Http\Service\UserService;
-use App\Interfaces\IUserRepository;
+use App\Http\Service\DealerService;
+use App\Interfaces\Repositories\IDealerRepository;
+use App\Interfaces\Repositories\IUserRepository;
+use App\Interfaces\Services\IDealerService;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -17,7 +20,12 @@ class CrudServiceProvider extends ServiceProvider
     public function register(): void
     {
         //đăng ký service như thế này
+        // $this->assignServices(DealerController::class, IDealerService::class, DealerService::class);
+        // $this->assignServices(DealerService::class, IDealerRepository::class, DealerRepository::class);
         $this->assignServices(UserService::class, IUserRepository::class, UserRepository::class);
+        // $this->interfaceBinder(IUserRepository::class, UserRepository::class);
+        $this->interfaceBinder(IDealerService::class, DealerService::class);
+        $this->interfaceBinder(IDealerRepository::class, DealerRepository::class);
     }
 
     /**
@@ -37,5 +45,9 @@ class CrudServiceProvider extends ServiceProvider
     private function assignServices(string|array $class, string $dependency, string $implementation): void
     {
         $this->app->when($class)->needs($dependency)->give($implementation);
+    }
+    private function interfaceBinder($interface, $implementation)
+    {
+        $this->app->bind($interface,  $implementation);
     }
 }

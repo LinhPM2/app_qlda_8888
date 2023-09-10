@@ -2,7 +2,7 @@
 
 namespace App\Http\Repositories;
 
-use App\Interfaces\IUserRepository;
+use App\Interfaces\Repositories\IUserRepository;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +15,7 @@ class UserRepository implements IUserRepository
     }
     public function getList($scopeOptions = [], $sortOptions = [], int $perPage)
     {
-        return User::paginate($perPage);
+        return User::paginate($perPage)->withQueryString();
     }
     public function show(string $id)
     {

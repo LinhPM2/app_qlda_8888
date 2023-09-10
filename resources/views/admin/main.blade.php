@@ -62,8 +62,9 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+<script src="/theme/plugins/jquery/jquery.min.js"></script>
 @include('share.footer')
 <!-- Page specific script -->
-
+@yield('extra_lib')
 </body>
 </html>
