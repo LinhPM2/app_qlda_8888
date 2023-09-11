@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Interfaces\Repositories\IDealerRepository;
 use App\Models\dealer;
+use App\Models\otherContact;
 use Exception;
 class DealerRepository implements IDealerRepository
 {
@@ -47,6 +48,7 @@ class DealerRepository implements IDealerRepository
     public function delete($request){
         $dealer = dealer::where('id', $request->input('id'))->first();
         if ($dealer) {
+            otherContact::where('IDDealer',$request->input('id'))->delete();
             $dealer->delete();
             return true;
         }
