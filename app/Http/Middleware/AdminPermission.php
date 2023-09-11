@@ -3,10 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Auth\Access\Response as AccessResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
+
 class AdminPermission
 {
     /**
@@ -16,9 +17,10 @@ class AdminPermission
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Gate::allows('leader-activity')) {
+        if (Gate::allows('admin-activity')) {
             return $next($request);
+        } else {
+            return redirect(route('admin'));
         }
-        return AccessResponse::denyWithStatus(403, __('auth.unauthorized'));
     }
 }

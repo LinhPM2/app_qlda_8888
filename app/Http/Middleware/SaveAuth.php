@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Service\AuthorizeService;
 use Closure;
-use Illuminate\Auth\Access\Response as AccessResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class LeaderPermission
+class SaveAuth
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,10 @@ class LeaderPermission
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Gate::allows('leader-activity')) {
-            return $next($request);
+        if (Auth::check()) {
+            $setuser = AuthorizeService::getInstance();
+            $setuser->setUser();
         }
-        return redirect(route('admin'));
+        return $next($request);
     }
 }
