@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Interfaces\Repositories\IDealerRepository;
 use App\Models\dealer;
+use App\Models\otherContact;
 use Exception;
 class DealerRepository implements IDealerRepository
 {
@@ -19,10 +20,39 @@ class DealerRepository implements IDealerRepository
                 'specificAddress'=>$request->input('specificAddress'),
                 'businessItem'=>$request->input('businessItem')
             ]);
+            return true;
         }catch(Exception $ex){
             Session()->flash('error',$ex->getMessage());
+            return false;
         }
-        return null;
+    }
+
+    public function update($request, $dealer){
+        try {
+            $dealer->dealerName = $request->input('dealerName');
+            $dealer->gender = $request->input('gender');
+            $dealer->phoneNumber = $request->input('phoneNumber');
+            $dealer->dateOfBirth = date($request->input('dateOfBirth'));
+            $dealer->country = $request->input('country');
+            $dealer->specificAddress = $request->input('specificAddress');
+            $dealer->businessItem = $request->input('businessItem');
+            $dealer->save();
+            Session()->flash('success', 'Sửa thông tin thành công');
+        } catch (Exception $ex) {
+            Session()->flash('error', $ex->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public function delete($request){
+        $dealer = dealer::where('id', $request->input('id'))->first();
+        if ($dealer) {
+            otherContact::where('IDDealer',$request->input('id'))->delete();
+            $dealer->delete();
+            return true;
+        }
+        return false;
     }
 
 }

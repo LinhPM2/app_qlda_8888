@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateDealerRequest extends FormRequest
+class CreateOtherContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,26 +23,22 @@ class CreateDealerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'dealerName'=>'required',
+            'fullName'=>'required',
+            'dateOfBirth'=>'required',
             'gender'=>'required',
-            'dateOfBirth'=> 'required',
             'phoneNumber'=>'required',
-            'country'=>'required',
-            'specificAddress'=>'required',
-            'businessItem'=>'required',
+            'IDDealer'=>'required',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'dealerName.required'=> 'Tên đại lý không được để trống',
+            'fullName.required'=> 'Họ tên không được để trống',
+            'dateOfBirth.required'=> 'Ngày sinh không được để trống',
             'gender.required'=> 'Giới tính không được để trống',
             'phoneNumber.required'=> 'Số điện thoại không được để trống',
-            'dateOfBirth.required'=> 'Ngày sinh không được để trống',
-            'country.required'=> 'Quốc gia không được để trống',
-            'specificAddress.required'=> 'Địa chỉ không được để trống',
-            'businessItem.required'=> 'Mặt hàng kinh doanh không được để trống',
+            'IDDealer.required'=> 'Đại lý không được để trống',
         ];
     }
 }

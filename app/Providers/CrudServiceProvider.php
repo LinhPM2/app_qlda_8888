@@ -3,12 +3,16 @@
 namespace App\Providers;
 
 use App\Http\Repositories\DealerRepository;
+use App\Http\Repositories\OtherContactRepository;
 use App\Http\Repositories\UserRepository;
 use App\Http\Service\DealerService;
+use App\Http\Service\OtherContactService;
 use App\Http\Service\UserService;
 use App\Interfaces\Repositories\IDealerRepository;
+use App\Interfaces\Repositories\IOtherContactRepository;
 use App\Interfaces\Repositories\IUserRepository;
 use App\Interfaces\Services\IDealerService;
+use App\Interfaces\Services\IOtherContactService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,6 +30,8 @@ class CrudServiceProvider extends ServiceProvider
         $this->interfaceBinder(IUserRepository::class, UserRepository::class);
         $this->interfaceBinder(IDealerService::class, DealerService::class);
         $this->interfaceBinder(IDealerRepository::class, DealerRepository::class);
+        $this->interfaceBinder(IOtherContactService::class, OtherContactService::class);
+        $this->interfaceBinder(IOtherContactRepository::class, OtherContactRepository::class);
     }
 
     /**
