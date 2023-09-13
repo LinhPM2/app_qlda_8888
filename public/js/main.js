@@ -36,15 +36,15 @@ function DeleteDealer(id, url){
  * @param {*} actionString string thao tác, sẽ gắp string này với template thông báo trên toastr
  * @example sendAjax('DELETE', {id: 1}, "google.com", undefined, undefined, "Thao tác");
  */
-const sendAjax = (type, data, url, callbackOnSuccess, datatype = JSON, actionString = "Thao tác") => {
+const sendAjax = (type, data, url, callbackOnSuccess,callbackOnError, datatype, actionString = "Thao tác") => {
     //skip opt params ---> undefined
     $.ajax({
         type: type,
-        datatype:datatype,
+        datatype:datatype ? datatype : JSON,
         data:data,
         url:url,
         success: callbackOnSuccess ? callbackOnSuccess : toastr.success(`${actionString} thành công`),
-        error: toastr.error(`${actionString} không thành công`)
+        error: callbackOnError? callbackOnError : toastr.error(`${actionString} không thành công`)
     })
 }
 
