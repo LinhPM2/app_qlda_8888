@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'atz.admin' => \App\Http\Middleware\AdminPermission::class,
         'atz.leader' => \App\Http\Middleware\LeaderPermission::class,
+        'atz.user' => \App\Http\Middleware\SaveAuth::class
     ];
 }

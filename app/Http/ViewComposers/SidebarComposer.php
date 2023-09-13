@@ -19,20 +19,19 @@ class SidebarComposer
     }
     public function compose(View $view)
     {
-        $view->with('list', $this->tabs);
+        $view->with('list', $this->PermissionFiltering());
     }
     private function PermissionFiltering(): array
     {
         $filtered = [];
-        if (Gate::allows('admin-activity')) {
-            $filtered = $this->tabs;
-        } elseif (Gate::allows('leader-activity')) {
+        if (Gate::allows('admin-activity')) { $filtered = $this->tabs; }
+        elseif (Gate::allows('leader-activity')) {
             foreach ($this->tabs as $tab) {
                 if ($tab->allowUser == __('roles.leader') || $tab->allowUser == __('roles.user')) {
                     array_push($filtered, $tab);
                 }
-            }
-        } else {
+            }}
+        else {
             foreach ($this->tabs as $tab) {
                 if ($tab->allowUser == __('roles.user')) {
                     array_push($filtered, $tab);

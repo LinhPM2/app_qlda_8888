@@ -46,10 +46,11 @@ Route::middleware(['auth', 'auth.basic'])->group(function () {
         });
         Route::middleware(['atz.admin'])->prefix('users')->group(function () {
             Route::get('list',[UserController::class, 'index'])->name('users.list');
-            Route::get('user/{id}',[UserController::class, 'show'])->name('users.detail');
-            Route::put('edit',[UserController::class, 'edit'])->name('users.edit');
-            Route::delete('delete',[UserController::class, 'delete'])->name('users.delete');
-            Route::post('create',[UserController::class, 'create'])->name('users.create');
+            Route::get('create',[UserController::class, 'create'])->name('users.create');
+            Route::post('store',[UserController::class, 'store'])->name('users.store');
+            Route::get('/{id}',[UserController::class, 'show'])->name('users.detail');
+            Route::patch('edit/{id}',[UserController::class, 'edit'])->name('users.edit');
+            Route::delete('delete/{id}',[UserController::class, 'delete'])->name('users.delete');
         });
     });
 });
