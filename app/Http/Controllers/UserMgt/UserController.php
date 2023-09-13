@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\UserMgt;
 
 use App\Http\Controllers\Controller;
-use App\Http\Service\UserService;
+use App\Interfaces\Services\IUserService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserController extends Controller
 {
-    public function __construct(private UserService $userService)
+    public function __construct(private IUserService $userService)
     {
     }
     public function index()

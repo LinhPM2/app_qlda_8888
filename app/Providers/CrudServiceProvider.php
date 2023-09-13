@@ -13,8 +13,8 @@ use App\Interfaces\Repositories\IOtherContactRepository;
 use App\Interfaces\Repositories\IUserRepository;
 use App\Interfaces\Services\IDealerService;
 use App\Interfaces\Services\IOtherContactService;
+use App\Interfaces\Services\IUserService;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Hash;
 
 class CrudServiceProvider extends ServiceProvider
 {
@@ -28,6 +28,7 @@ class CrudServiceProvider extends ServiceProvider
 
         // $this->assignServices(UserService::class, IUserRepository::class, UserRepository::class);
         $this->interfaceBinder(IUserRepository::class, UserRepository::class);
+        $this->interfaceBinder(IUserService::class, UserService::class);
         $this->interfaceBinder(IDealerService::class, DealerService::class);
         $this->interfaceBinder(IDealerRepository::class, DealerRepository::class);
         $this->interfaceBinder(IOtherContactService::class, OtherContactService::class);

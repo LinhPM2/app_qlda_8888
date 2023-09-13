@@ -16,7 +16,6 @@ class UserService implements IUserService
     public function getUserList()
     {
         try {
-            //code...
             return $this->userRepository->getList([], [], 10);
         } catch (\Throwable $th) {
             throw new \Exception($th->getMessage());
