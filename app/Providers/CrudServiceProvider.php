@@ -39,15 +39,12 @@ class CrudServiceProvider extends ServiceProvider
         $this->interfaceBinder(IUserService::class, UserService::class);
         $this->interfaceBinder(IDealerService::class, DealerService::class);
         $this->interfaceBinder(IDealerRepository::class, DealerRepository::class);
-<<<<<<< HEAD
         $this->interfaceBinder(IGroupDealerRepository::class,GroupDealerRepository::class);
         $this->interfaceBinder(IGroupService::class,GroupService::class);
         $this->interfaceBinder(IGroupDetailRepository::class,GroupDetailRepository::class);
         $this->interfaceBinder(IGroupDetailService::class,GroupDetailService::class);
-=======
         $this->interfaceBinder(IOtherContactService::class, OtherContactService::class);
         $this->interfaceBinder(IOtherContactRepository::class, OtherContactRepository::class);
->>>>>>> ecd7db777f54ff0523163bd8c7ac4c8579dbf451
     }
 
     /**
