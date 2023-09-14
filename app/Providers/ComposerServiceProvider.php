@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\ViewComposers\RoleListComposer;
 use Illuminate\Support\ServiceProvider;
 
 class ComposerServiceProvider extends ServiceProvider
@@ -20,5 +21,6 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('share.sidebar.list', 'App\Http\ViewComposers\SidebarComposer');
+        view()->composer('admin.users.upsert', RoleListComposer::class);
     }
 }

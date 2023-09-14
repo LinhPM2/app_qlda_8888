@@ -3,6 +3,7 @@
 use  App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DealerController;
 use App\Http\Controllers\MainScreenController;
+use App\Http\Controllers\OtherContactController;
 use App\Http\Controllers\UserMgt\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupDealerController;
@@ -36,12 +37,22 @@ Route::middleware(['auth', 'auth.basic'])->group(function () {
             Route::get('edit/{dealer}', [DealerController::class, 'edit']);
             Route::post('edit/{dealer}', [DealerController::class, 'postedit']);
         });
+        Route::prefix('otherContact')->group(function () {
+            Route::get('list',[OtherContactController::class,'index'])->name('otherContact');
+            Route::get('getList',[OtherContactController::class,'getList']);
+            Route::get('add',[OtherContactController::class,'create']);
+            Route::post('add/store',[OtherContactController::class,'store']);
+            Route::get('edit/{otherContact}', [OtherContactController::class, 'edit']);
+            Route::post('edit/{otherContact}', [OtherContactController::class, 'postedit']);
+            Route::DELETE('delete', [OtherContactController::class, 'delete']);
+        });
         Route::middleware(['atz.admin'])->prefix('users')->group(function () {
             Route::get('list',[UserController::class, 'index'])->name('users.list');
-            Route::get('user/{id}',[UserController::class, 'show'])->name('users.detail');
-            Route::put('edit',[UserController::class, 'edit'])->name('users.edit');
-            Route::delete('delete',[UserController::class, 'delete'])->name('users.delete');
-            Route::post('create',[UserController::class, 'create'])->name('users.create');
+            Route::get('create',[UserController::class, 'create'])->name('users.create');
+            Route::post('store',[UserController::class, 'store'])->name('users.store');
+            Route::get('/{id}',[UserController::class, 'show'])->name('users.detail');
+            Route::patch('edit/{id}',[UserController::class, 'edit'])->name('users.edit');
+            Route::delete('delete/{id}',[UserController::class, 'delete'])->name('users.delete');
         });
         Route::prefix('group')->group(function(){
             Route::get('list',[GroupDealerController::class,'index'])->name('group');

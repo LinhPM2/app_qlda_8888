@@ -14,25 +14,28 @@ class SidebarComposer
         $this->tabs = [
             new SidebarTabs("Quản lý User", "/admin/users/list", __('roles.admin')),
             new SidebarTabs("Quản lý Đại lý", "/admin/dealer/list"),
+<<<<<<< HEAD
             new SidebarTabs("Quản lý Groups",route('group')),
+=======
+            new SidebarTabs("Quản lý Liên hệ khác", "/admin/otherContact/list"),
+>>>>>>> ecd7db777f54ff0523163bd8c7ac4c8579dbf451
         ];
     }
     public function compose(View $view)
     {
-        $view->with('list', $this->tabs);
+        $view->with('list', $this->PermissionFiltering());
     }
     private function PermissionFiltering(): array
     {
         $filtered = [];
-        if (Gate::allows('admin-activity')) {
-            $filtered = $this->tabs;
-        } elseif (Gate::allows('leader-activity')) {
+        if (Gate::allows('admin-activity')) { $filtered = $this->tabs; }
+        elseif (Gate::allows('leader-activity')) {
             foreach ($this->tabs as $tab) {
                 if ($tab->allowUser == __('roles.leader') || $tab->allowUser == __('roles.user')) {
                     array_push($filtered, $tab);
                 }
-            }
-        } else {
+            }}
+        else {
             foreach ($this->tabs as $tab) {
                 if ($tab->allowUser == __('roles.user')) {
                     array_push($filtered, $tab);

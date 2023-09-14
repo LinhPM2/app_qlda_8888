@@ -5,7 +5,31 @@ $.ajaxSetup({
 });
 function DeleteDealer(id, url){
     console.log(id,url)
-    if(confirm("Bạn có thực sự muốn xóa đại lý này không?")){
+    if(confirm("Bạn có thực sự muốn xóa đại lý này không? thao tác này sẽ xóa toàn bộ các liên hệ khác liên quan!")){
+        $.ajax({
+            type: 'DELETE',
+            datatype:JSON,
+            data:{id},
+            url:url,
+            success:function (result){
+                console.log(result);
+                if(result.error == 'false'){
+                    toastr.success(result.message)
+                    setTimeout(()=>{
+                        setValue();
+                    },1000)
+                }
+                else {
+                    toastr.error("Xóa không thành công");
+                }
+            }
+        })
+    }
+};
+
+function DeleteOtherContact(id, url){
+    console.log(id,url)
+    if(confirm("Bạn có thực sự muốn xóa liên hệ khác này không?")){
         $.ajax({
             type: 'DELETE',
             datatype:JSON,
@@ -82,15 +106,15 @@ function DeleteGroupDetail(id, url){
  * @param {*} actionString string thao tác, sẽ gắp string này với template thông báo trên toastr
  * @example sendAjax('DELETE', {id: 1}, "google.com", undefined, undefined, "Thao tác");
  */
-const sendAjax = (type, data, url, callbackOnSuccess, datatype = JSON, actionString = "Thao tác") => {
+const sendAjax = (type, data, url, callbackOnSuccess,callbackOnError, datatype, actionString = "Thao tác") => {
     //skip opt params ---> undefined
     $.ajax({
         type: type,
-        datatype:datatype,
+        datatype:datatype ? datatype : JSON,
         data:data,
         url:url,
         success: callbackOnSuccess ? callbackOnSuccess : toastr.success(`${actionString} thành công`),
-        error: toastr.error(`${actionString} không thành công`)
+        error: callbackOnError? callbackOnError : toastr.error(`${actionString} không thành công`)
     })
 }
 

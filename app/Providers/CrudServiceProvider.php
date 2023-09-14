@@ -3,21 +3,32 @@
 namespace App\Providers;
 
 use App\Http\Repositories\DealerRepository;
+use App\Http\Repositories\OtherContactRepository;
 use App\Http\Repositories\UserRepository;
 use App\Http\Repositories\GroupDealerRepository;
 use App\Http\Repositories\GroupDetailRepository;
 use App\Http\Service\DealerService;
+<<<<<<< HEAD
 use App\Http\Service\GroupService;
 use App\Http\Service\GroupDetailService;
+=======
+use App\Http\Service\OtherContactService;
+use App\Http\Service\UserService;
+>>>>>>> ecd7db777f54ff0523163bd8c7ac4c8579dbf451
 use App\Interfaces\Repositories\IDealerRepository;
+use App\Interfaces\Repositories\IOtherContactRepository;
 use App\Interfaces\Repositories\IUserRepository;
 use App\Interfaces\Repositories\IGroupDealerRepository;
 use App\Interfaces\Repositories\IGroupDetailRepository;
 use App\Interfaces\Services\IDealerService;
+<<<<<<< HEAD
 use App\Interfaces\Services\IGroupDetailService;
 use App\Interfaces\Services\IGroupService;
+=======
+use App\Interfaces\Services\IOtherContactService;
+use App\Interfaces\Services\IUserService;
+>>>>>>> ecd7db777f54ff0523163bd8c7ac4c8579dbf451
 use Illuminate\Support\ServiceProvider;
-
 
 class CrudServiceProvider extends ServiceProvider
 {
@@ -28,16 +39,21 @@ class CrudServiceProvider extends ServiceProvider
     public function register(): void
     {
         //đăng ký service như thế này
-        // $this->assignServices(DealerController::class, IDealerService::class, DealerService::class);
-        // $this->assignServices(DealerService::class, IDealerRepository::class, DealerRepository::class);
-        $this->assignServices(UserService::class, IUserRepository::class, UserRepository::class);
-        // $this->interfaceBinder(IUserRepository::class, UserRepository::class);
+
+        // $this->assignServices(UserService::class, IUserRepository::class, UserRepository::class);
+        $this->interfaceBinder(IUserRepository::class, UserRepository::class);
+        $this->interfaceBinder(IUserService::class, UserService::class);
         $this->interfaceBinder(IDealerService::class, DealerService::class);
         $this->interfaceBinder(IDealerRepository::class, DealerRepository::class);
+<<<<<<< HEAD
         $this->interfaceBinder(IGroupDealerRepository::class,GroupDealerRepository::class);
         $this->interfaceBinder(IGroupService::class,GroupService::class);
         $this->interfaceBinder(IGroupDetailRepository::class,GroupDetailRepository::class);
         $this->interfaceBinder(IGroupDetailService::class,GroupDetailService::class);
+=======
+        $this->interfaceBinder(IOtherContactService::class, OtherContactService::class);
+        $this->interfaceBinder(IOtherContactRepository::class, OtherContactRepository::class);
+>>>>>>> ecd7db777f54ff0523163bd8c7ac4c8579dbf451
     }
 
     /**

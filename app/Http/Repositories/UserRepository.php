@@ -8,26 +8,25 @@ use Illuminate\Support\Facades\Auth;
 
 class UserRepository implements IUserRepository
 {
-    private $currentUser;
-    public function __construct()
-    {
-        $this->currentUser = Auth::user();
-    }
     public function getList($scopeOptions = [], $sortOptions = [], int $perPage)
     {
         return User::paginate($perPage)->withQueryString();
     }
     public function show(string $id)
     {
+        return User::findOrFail($id);
     }
 
-    public function create(User $user)
+    public function create(array $cre)
     {
+        User::create($cre);
     }
     public function edit(User $user)
     {
+        $user->save();
     }
     public function delete(string $id)
     {
+        User::destroy($id);
     }
 }
