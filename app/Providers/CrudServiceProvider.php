@@ -4,10 +4,18 @@ namespace App\Providers;
 
 use App\Http\Repositories\DealerRepository;
 use App\Http\Repositories\UserRepository;
+use App\Http\Repositories\GroupDealerRepository;
+use App\Http\Repositories\GroupDetailRepository;
 use App\Http\Service\DealerService;
+use App\Http\Service\GroupService;
+use App\Http\Service\GroupDetailService;
 use App\Interfaces\Repositories\IDealerRepository;
 use App\Interfaces\Repositories\IUserRepository;
+use App\Interfaces\Repositories\IGroupDealerRepository;
+use App\Interfaces\Repositories\IGroupDetailRepository;
 use App\Interfaces\Services\IDealerService;
+use App\Interfaces\Services\IGroupDetailService;
+use App\Interfaces\Services\IGroupService;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -26,6 +34,10 @@ class CrudServiceProvider extends ServiceProvider
         // $this->interfaceBinder(IUserRepository::class, UserRepository::class);
         $this->interfaceBinder(IDealerService::class, DealerService::class);
         $this->interfaceBinder(IDealerRepository::class, DealerRepository::class);
+        $this->interfaceBinder(IGroupDealerRepository::class,GroupDealerRepository::class);
+        $this->interfaceBinder(IGroupService::class,GroupService::class);
+        $this->interfaceBinder(IGroupDetailRepository::class,GroupDetailRepository::class);
+        $this->interfaceBinder(IGroupDetailService::class,GroupDetailService::class);
     }
 
     /**

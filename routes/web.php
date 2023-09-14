@@ -5,6 +5,8 @@ use App\Http\Controllers\DealerController;
 use App\Http\Controllers\MainScreenController;
 use App\Http\Controllers\UserMgt\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GroupDealerController;
+use App\Http\Controllers\GroupDetailDealerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +42,20 @@ Route::middleware(['auth', 'auth.basic'])->group(function () {
             Route::put('edit',[UserController::class, 'edit'])->name('users.edit');
             Route::delete('delete',[UserController::class, 'delete'])->name('users.delete');
             Route::post('create',[UserController::class, 'create'])->name('users.create');
+        });
+        Route::prefix('group')->group(function(){
+            Route::get('list',[GroupDealerController::class,'index'])->name('group');
+            Route::get('add',[GroupDealerController::class,'add']);
+            Route::post('add/store',[GroupDealerController::class,'store']);
+            Route::get('edit/{groupDealer}',[GroupDealerController::class, 'edit']);
+            Route::post('edit/{groupDealer}',[GroupDealerController::class, 'postedit']);
+            Route::delete('delete',[GroupDealerController::class,'delete']);
+        });
+        Route::prefix('groupdetail')->group(function(){
+            Route::get('detail/{groupDealer}',[GroupDetailDealerController::class, 'detail']);
+            Route::get('add/{groupID}',[GroupDetailDealerController::class,'add'])->name('gd.add');
+            Route::post('add/store',[GroupDetailDealerController::class,'store'])->name('gd.store');
+            Route::delete('delete',[GroupDetailDealerController::class,'delete']);
         });
     });
 });
