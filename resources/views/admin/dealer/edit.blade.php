@@ -1,5 +1,48 @@
 @extends('admin.main')
 @section('content')
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        color: #333;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        text-align: left;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        margin: auto;
+        margin-bottom: 50px;
+    }
+
+    table th {
+        background-color: #ff9800;
+        color: #fff;
+        font-weight: bold;
+        padding: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #ccc;
+    }
+
+    table tr:nth-child(even) td {
+        background-color: #f2f2f2;
+    }
+
+    table tr:hover td {
+        background-color: #ffedcc;
+    }
+
+    table td {
+        background-color: #fff;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        font-weight: bold;
+    }
+</style>
+
+
     <form action="/admin/dealer/edit/{{$dealer->id}}" method="post" id="quickForm" novalidate="novalidate">
         <div class="card-body">
         <div class="form-group">
@@ -17,7 +60,7 @@
 
             <div class="form-group">
                 <label for="phoneNumber">Số Điện thoại:</label>
-                <input type="number" name="phoneNumber" value="{{$dealer->phoneNumber}}" class="form-control" id="phoneNumber" placeholder="Nhập số điện thoại">
+                <input type="text" name="phoneNumber" value="{{$dealer->phoneNumber}}" class="form-control" id="phoneNumber" placeholder="Nhập số điện thoại">
             </div>
 
             <div class="form-group">
@@ -41,8 +84,44 @@
             </div>
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
         </div>
         @csrf
     </form>
+
+    <div class="card card-primary mt-4">
+        <div class="card-header ">
+            <h3 class="card-title">Các liên hệ khác của {{$dealer->dealerName}}</h3>
+        </div>
+    </div>
+    <div class="mb-2">
+        <a href="/admin/otherContact/add/{{$dealer->id}}" class="btn btn-success"><i class="fas fa-plus mr-1"></i>Thêm liên hệ khác</a>
+    </div>
+    <table class="mb-5">
+        <thead>
+            <tr >
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Số điện thoại</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for ($i = 0; $i < count($otherContacts); $i++)
+            <tr>
+                <td>{{$otherContacts[$i]->fullName}}</td>
+                <td>{{$otherContacts[$i]->dateOfBirth}}</td>
+                <td>{{$otherContacts[$i]->gender == 0 ? "Nam" : "Nữ"}}</td>
+                <td>{{$otherContacts[$i]->phoneNumber}}</td>
+                <td>
+                <a href="/admin/otherContact/edit/{{$otherContacts[$i]->id}}"class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
+                <button onclick="DeleteOtherContact({{$otherContacts[$i]->id}},'/admin/otherContact/delete')" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+            </td>
+        @endfor
+        </tbody>
+    </table>
+
+    
+
 @endsection

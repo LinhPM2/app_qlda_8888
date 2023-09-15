@@ -33,7 +33,6 @@ class OtherContactController extends Controller
         } else {
             $list = $this->otherContactService->getAll()->where('IDDealer',$request->IDDealer)->get();
         }
-        // dd($request->IDDealer,$list);
         if ($request->orderBy == "desc") {
             switch ($request->orderType) {
                 case "phoneNumber":
@@ -60,10 +59,11 @@ class OtherContactController extends Controller
         return json_encode(array('totalPage' => $totalPage, 'list' => $list));
     }
 
-    public function create(){
+    public function create(dealer $dealer){
         return view('admin.otherContact.add',[
             'title'=>'Thêm Liên hệ khác',
-            'dealers'=> dealer::get()
+            'dealers'=> dealer::get(),
+            'dealer'=> $dealer
         ]);
     }
 
