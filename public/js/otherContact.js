@@ -17,7 +17,7 @@ function DeleteOtherContact(id, url){
                 if(result.error == 'false'){
                     toastr.success(result.message)
                     setTimeout(()=>{
-                        setValue();
+                        location.reload();
                     },1000)
                 }
                 else {

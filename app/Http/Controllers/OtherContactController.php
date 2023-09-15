@@ -62,27 +62,28 @@ class OtherContactController extends Controller
     public function create(dealer $dealer){
         return view('admin.otherContact.add',[
             'title'=>'Thêm Liên hệ khác',
-            'dealers'=> dealer::get(),
             'dealer'=> $dealer
         ]);
     }
 
     public function store(CreateOtherContactRequest $request){
         $result = $this->otherContactService->create($request);
-        return redirect()->back();
+        $dealer = dealer::where('id',$request->IDDealer)->first();
+        return redirect('/admin/dealer/edit/'.$dealer->id);
     }
 
     public function edit(otherContact $otherContact){
         return view('admin.otherContact.edit',[
             'title'=>'Sửa thông tin liên hệ khác',
-            'dealers'=> dealer::get(),
+            'dealer'=> dealer::where('id',$otherContact->IDDealer)->first(),
             'otherContact'=>$otherContact,
         ]);
     }
 
     public function postedit(otherContact $otherContact,CreateOtherContactRequest $request){
         $result = $this->otherContactService->edit($request,$otherContact);
-        return redirect()->back();
+        $dealer = dealer::where('id',$otherContact->IDDealer)->first();
+        return redirect('/admin/dealer/edit/'.$dealer->id);
     }
 
     public function delete(Request $request){
