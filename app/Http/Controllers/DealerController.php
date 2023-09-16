@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDealerRequest;
 use App\Interfaces\Services\IDealerService;
+use App\Interfaces\Services\IOtherContactService;
 use App\Models\dealer;
 use Illuminate\Http\Request;
 
 class DealerController extends Controller
 {
-    public function __construct(private IDealerService $dealerService){
+    public function __construct(private IDealerService $dealerService,private IOtherContactService $otherContactService){
     }
     public function index(){
         return view('admin.dealer.list',[
@@ -86,6 +87,7 @@ class DealerController extends Controller
         return view('admin.dealer.edit',[
             'title'=>'Sửa thông tin đại lý',
             'dealer'=>$dealer,
+            'otherContacts' => $this->otherContactService->getAll()->where('IDDealer',$dealer->id)->get()
         ]);
     }
 

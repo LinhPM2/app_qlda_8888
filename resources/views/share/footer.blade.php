@@ -7,6 +7,8 @@
 <script src="/theme/plugins/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="/theme/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/dealer.js"></script>
+<script src="/js/otherContact.js"></script>
 <script>
     @if ($errors->any())
         @foreach ($errors->all() as $error)

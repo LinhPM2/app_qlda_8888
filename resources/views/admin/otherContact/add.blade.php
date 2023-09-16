@@ -28,9 +28,7 @@
             <div class="form-group">
                 <label for="IDDealer">Đại lý:</label>
                 <select name="IDDealer" id="IDDealer" class="form-control">
-                    @for ($i = 0; $i < count($dealers); $i++)
-                        <option value="{{ $dealers[$i]->id }}">{{ $dealers[$i]->dealerName }}</option>
-                    @endfor
+                    <option value="{{ $dealer->id }}" >{{ $dealer->dealerName }}</option>
                 </select>
             </div>
         </div>
