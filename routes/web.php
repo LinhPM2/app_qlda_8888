@@ -38,7 +38,7 @@ Route::middleware(['auth', 'auth.basic'])->group(function () {
         Route::prefix('otherContact')->group(function () {
             Route::get('list',[OtherContactController::class,'index'])->name('otherContact');
             Route::get('getList',[OtherContactController::class,'getList']);
-            Route::get('add',[OtherContactController::class,'create']);
+            Route::get('add/{dealer}',[OtherContactController::class,'create']);
             Route::post('add/store',[OtherContactController::class,'store']);
             Route::get('edit/{otherContact}', [OtherContactController::class, 'edit']);
             Route::post('edit/{otherContact}', [OtherContactController::class, 'postedit']);

@@ -14,7 +14,7 @@ class SidebarComposer
         $this->tabs = [
             new SidebarTabs("Quản lý User", "/admin/users/list", __('roles.admin')),
             new SidebarTabs("Quản lý Đại lý", "/admin/dealer/list"),
-            new SidebarTabs("Quản lý Liên hệ khác", "/admin/otherContact/list"),
+            // new SidebarTabs("Quản lý Liên hệ khác", "/admin/otherContact/list"),
         ];
     }
     public function compose(View $view)
