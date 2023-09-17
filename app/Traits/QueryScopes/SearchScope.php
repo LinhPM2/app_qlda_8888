@@ -21,8 +21,8 @@ trait SearchScope
         $count = 1;
         foreach ($filter as $key => $value) {
             $res = ($count == 1) ?
-                $res->where(strval($key), 'like', '%' . strval($value) . '%')
-                : $res->orWhere(strval($key), 'like', '%' . strval($value) . '%');
+                $res->where(strval($key), 'ilike', '%' . strval($value) . '%')
+                : $res->orWhere(strval($key), 'ilike', '%' . strval($value) . '%');
             $count++;
         }
         return empty($filter) ? $query : $res;
@@ -44,8 +44,8 @@ trait SearchScope
         $columns = Schema::getColumnListing(app($modelNamespace)->getTable());
         for ($i=0; $i < count($columns) ; $i++) {
             $res = ($i == 1) ?
-                $res->where(strval($columns[$i]), 'like', '%' . strval($searchValue) . '%')
-                : $res->orWhere(strval($columns[$i]), 'like', '%' . strval($searchValue) . '%');
+                $res->where(strval($columns[$i]), 'ilike', '%' . strval($searchValue) . '%')
+                : $res->orWhere(strval($columns[$i]), 'ilike', '%' . strval($searchValue) . '%');
         }
         return $query;
     }

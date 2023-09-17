@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class otherContact extends Model
 {
-    use HasFactory, SearchScope ;
+    use HasFactory, SearchScope;
     protected static function newFactory(): Factory
-    {   
+    {
         return otherContact_dealerFactory::new();
     }
     protected $fillable = [
