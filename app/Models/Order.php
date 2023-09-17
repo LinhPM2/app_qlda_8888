@@ -21,4 +21,10 @@ class Order extends Model
         'quantity',
         'notes',
     ];
+    public function dealer() {
+        return $this->belongsTo(dealer::class,'IDDealer','id');
+    }
+    public function dealers() {
+        return $this->belongsTo(dealer::class,'IDDealer','id');
+    }
 }

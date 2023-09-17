@@ -37,7 +37,7 @@ class dealer extends Model
     public function otherContact(){
         return $this -> hasMany(otherContact::class, 'IDDealer','id');
     }
-    public function Order(){
+    public function order(){
         return $this -> hasMany(Order::class, 'IDDealer','id');
     }
 }
