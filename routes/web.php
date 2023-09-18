@@ -8,6 +8,7 @@ use App\Http\Controllers\UserMgt\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupDealerController;
 use App\Http\Controllers\GroupDetailDealerController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,15 @@ Route::middleware(['auth', 'auth.basic'])->group(function () {
             Route::get('add/{groupID}',[GroupDetailDealerController::class,'add'])->name('gd.add');
             Route::post('add/store',[GroupDetailDealerController::class,'store'])->name('gd.store');
             Route::delete('delete',[GroupDetailDealerController::class,'delete']);
+        });
+        Route::prefix('order')->group(function(){
+            Route::get('list',[OrderController::class,'index'])->name('order');
+            Route::get('select',[OrderController::class,'selectDealer'])->name('order.select');
+            Route::get('add/{id}',[OrderController::class,'add'])->name('order.add');
+            Route::post('add/store',[OrderController::class,'store'])->name('order.store');
+            Route::get('edit/{orderid}',[OrderController::class, 'edit'])->name('order.edit');
+            Route::patch('update',[OrderController::class, 'update'])->name('order.update');
+            Route::delete('delete/{id}',[OrderController::class,'delete'])->name('order.delete');
         });
     });
 });
