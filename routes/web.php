@@ -25,6 +25,7 @@ use App\Http\Controllers\OrderController;
 Route::get('/', fn () => redirect()->route('login'));
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/store', [LoginController::class, 'store']);
+Route::get('/signout', [LoginController::class, 'signout'])->name('logout');
 
 
 Route::middleware(['auth', 'auth.basic'])->group(function () {

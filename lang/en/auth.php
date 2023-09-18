@@ -17,4 +17,5 @@ return [
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'unauthorized' => "You are not authorized with this permission",
+    'logout' => "Logout",
 ];
