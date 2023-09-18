@@ -1,7 +1,7 @@
 <?php
 namespace App\Interfaces\Services;
 
-interface IDealerService
+interface IAnniversaryDealerService
 {
     public function delete($request);
     public function create($request);

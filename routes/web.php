@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnniversaryDealerController;
 use  App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DealerController;
 use App\Http\Controllers\MainScreenController;
@@ -38,13 +39,20 @@ Route::middleware(['auth', 'auth.basic'])->group(function () {
             Route::post('edit/{dealer}', [DealerController::class, 'postedit']);
         });
         Route::prefix('otherContact')->group(function () {
-            Route::get('list',[OtherContactController::class,'index'])->name('otherContact');
-            Route::get('getList',[OtherContactController::class,'getList']);
+            // Route::get('getList',[OtherContactController::class,'getList']);
             Route::get('add/{dealer}',[OtherContactController::class,'create']);
             Route::post('add/store',[OtherContactController::class,'store']);
             Route::get('edit/{otherContact}', [OtherContactController::class, 'edit']);
             Route::post('edit/{otherContact}', [OtherContactController::class, 'postedit']);
             Route::DELETE('delete', [OtherContactController::class, 'delete']);
+        });
+        Route::prefix('anniversary')->group(function(){
+            Route::get('add/{dealer}',[AnniversaryDealerController::class,'create']);
+            Route::get('add/{dealer}',[AnniversaryDealerController::class,'create']);
+            Route::post('add/store',[AnniversaryDealerController::class,'store']);
+            Route::get('edit/{anniversary}', [AnniversaryDealerController::class, 'edit']);
+            Route::post('edit/{anniversary}', [AnniversaryDealerController::class, 'postedit']);
+            Route::DELETE('delete', [AnniversaryDealerController::class, 'delete']);
         });
         Route::middleware(['atz.admin'])->prefix('users')->group(function () {
             Route::get('list',[UserController::class, 'index'])->name('users.list');

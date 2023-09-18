@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Interfaces\Repositories\IDealerRepository;
+use App\Models\anniversaryDealer;
 use App\Models\dealer;
 use App\Models\otherContact;
 use Exception;
@@ -49,10 +50,14 @@ class DealerRepository implements IDealerRepository
         $dealer = dealer::where('id', $request->input('id'))->first();
         if ($dealer) {
             otherContact::where('IDDealer',$request->input('id'))->delete();
+            anniversaryDealer::where('IDDealer',$request->input('id'))->delete();
             $dealer->delete();
             return true;
         }
         return false;
     }
 
+    public function getAll(){
+        return dealer::query();
+    }
 }

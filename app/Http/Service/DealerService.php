@@ -24,4 +24,9 @@ class DealerService implements IDealerService
     {
         $this->dealerRepo->update($request,$dealer);
     }
+
+    public function getAll()
+    {
+        return $this->dealerRepo->getAll();
+    }
 }
