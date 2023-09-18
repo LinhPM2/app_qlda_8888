@@ -52,7 +52,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         sendAjax('DELETE', id, url, (res) => {
-                            $(this).closest('tr').remove();
+                            $(this).closest('tr').remove();     
                             Swal.fire('Success', res.message, 'success')
                         }, (res) => Swal.fire('Error Deleting', res.error, 'error'), JSON);
                     }

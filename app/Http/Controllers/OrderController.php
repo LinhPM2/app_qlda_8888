@@ -66,7 +66,7 @@ class OrderController extends Controller
             return response()->json(['message' => 'Xóa thành công'], 200);
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json(['Error' => $th->getMessage()], 400);
+            return response()->json(['error' => $th->getMessage()], 400);
         }
     }
 }
