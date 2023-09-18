@@ -89,6 +89,7 @@
         @csrf
     </form>
 
+    <!-- cac lien he khac-->
     <div class="card card-primary mt-4">
         <div class="card-header ">
             <h3 class="card-title">Các liên hệ khác của {{$dealer->dealerName}}</h3>
@@ -115,9 +116,41 @@
                 <td>{{$otherContacts[$i]->gender == 0 ? "Nam" : "Nữ"}}</td>
                 <td>{{$otherContacts[$i]->phoneNumber}}</td>
                 <td>
-                <a href="/admin/otherContact/edit/{{$otherContacts[$i]->id}}"class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
-                <button onclick="DeleteOtherContact({{$otherContacts[$i]->id}},'/admin/otherContact/delete')" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-            </td>
+                    <a href="/admin/otherContact/edit/{{$otherContacts[$i]->id}}"class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
+                    <button onclick="DeleteOtherContact({{$otherContacts[$i]->id}},'/admin/otherContact/delete')" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        @endfor
+        </tbody>
+    </table>
+
+    <!-- Cac ngay ky niem -->
+    <div class="card card-primary mt-4">
+        <div class="card-header ">
+            <h3 class="card-title">Các ngày kỉ niệm của {{$dealer->dealerName}}</h3>
+        </div>
+    </div>
+    <div class="mb-2">
+        <a href="/admin/anniversary/add/{{$dealer->id}}" class="btn btn-success"><i class="fas fa-plus mr-1"></i>Thêm ngày kỉ niệm khác</a>
+    </div>
+    <table class="mb-5">
+        <thead>
+            <tr >
+                <th>Tên ngày kỉ niệm</th>
+                <th>Ngày kỉ niệm</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for ($i = 0; $i < count($anniversaries); $i++)
+            <tr>
+                <td>{{$anniversaries[$i]->name}}</td>
+                <td>{{$anniversaries[$i]->eventDate}}</td>
+                <td>
+                    <a href="/admin/anniversary/edit/{{$anniversaries[$i]->id}}"class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
+                    <button onclick="DeleteAnniversary({{$anniversaries[$i]->id}},'/admin/anniversary/delete')" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
         @endfor
         </tbody>
     </table>

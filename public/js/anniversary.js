@@ -3,8 +3,10 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-function DeleteDealer(id, url){
-    if(confirm("Bạn có thực sự muốn xóa đại lý này không? thao tác này sẽ xóa toàn bộ các thông tin từ bảng khác liên quan!")){
+
+function DeleteAnniversary(id, url){
+    console.log(id,url)
+    if(confirm("Bạn có thực sự muốn xóa ngày kỉ niệm này không?")){
         $.ajax({
             type: 'DELETE',
             datatype:JSON,
@@ -15,7 +17,7 @@ function DeleteDealer(id, url){
                 if(result.error == 'false'){
                     toastr.success(result.message)
                     setTimeout(()=>{
-                        setValue();
+                        location.reload();
                     },1000)
                 }
                 else {
