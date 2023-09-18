@@ -22,7 +22,20 @@ class DealerService implements IDealerService
 
     public function edit($request, $dealer)
     {
-        $this->dealerRepo->update($request,$dealer);
+        $this->dealerRepo->update($request, $dealer);
+    }
+    public function list()
+    {
+        return $this->dealerRepo->list();
+    }
+    public function show(string $id)
+    {
+        try {
+          return  $this->dealerRepo->find($id);
+        } catch (\Throwable $th) {
+            //throw $th;
+            report($th);
+        }
     }
 
     public function getAll()

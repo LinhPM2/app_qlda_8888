@@ -15,6 +15,7 @@ class SidebarComposer
             new SidebarTabs("Quản lý User", "/admin/users/list", __('roles.admin')),
             new SidebarTabs("Quản lý Đại lý", "/admin/dealer/list"),
             new SidebarTabs("Quản lý Groups",route('group')),
+            new SidebarTabs("Quản lý đơn hàng",route('order')),
             // new SidebarTabs("Quản lý Liên hệ khác", "/admin/otherContact/list"),
         ];
     }
