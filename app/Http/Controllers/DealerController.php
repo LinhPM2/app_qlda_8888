@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDealerRequest;
+use App\Interfaces\Repositories\IAnniversaryDealerRepository;
+use App\Interfaces\Repositories\IOtherContactRepository;
+use App\Interfaces\Services\IAnniversaryDealerService;
 use App\Interfaces\Services\IDealerService;
 use App\Interfaces\Services\IOtherContactService;
 use App\Models\dealer;
@@ -10,7 +13,11 @@ use Illuminate\Http\Request;
 
 class DealerController extends Controller
 {
-    public function __construct(private IDealerService $dealerService,private IOtherContactService $otherContactService){
+    public function __construct(
+            private IDealerService $dealerService,
+            private IOtherContactRepository $otherContactRepo,
+            private IAnniversaryDealerRepository $anniversaryRepo,
+        ){
     }
     public function index(){
         return view('admin.dealer.list',[
@@ -23,13 +30,13 @@ class DealerController extends Controller
         if(!empty($request->searchValue)){
             switch ($request->typeSearch){
                 case "dealerName":
-                    $list = dealer::where('dealerName','like','%'.$request->searchValue.'%')->get();
+                    $list = $this->dealerService->getAll()->where('dealerName','like','%'.$request->searchValue.'%')->get();
                     break;
                 case "phoneNumber":
-                    $list = dealer::where('phoneNumber','like','%'.$request->searchValue.'%')->get();
+                    $list = $this->dealerService->getAll()->where('phoneNumber','like','%'.$request->searchValue.'%')->get();
             }
         } else {
-            $list = dealer::get();
+            $list = $this->dealerService->getAll()->get();
         }
 
         if ($request->orderBy == "desc") {
@@ -87,7 +94,8 @@ class DealerController extends Controller
         return view('admin.dealer.edit',[
             'title'=>'Sửa thông tin đại lý',
             'dealer'=>$dealer,
-            'otherContacts' => $this->otherContactService->getAll()->where('IDDealer',$dealer->id)->get()
+            'otherContacts' => $this->otherContactRepo->getAll()->where('IDDealer',$dealer->id)->get(),
+            'anniversaries' => $this->anniversaryRepo->getAll()->where('IDDealer',$dealer->id)->get(),
         ]);
     }
 

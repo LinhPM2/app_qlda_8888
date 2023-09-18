@@ -37,4 +37,9 @@ class DealerService implements IDealerService
             report($th);
         }
     }
+
+    public function getAll()
+    {
+        return $this->dealerRepo->getAll();
+    }
 }

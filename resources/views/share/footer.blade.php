@@ -9,6 +9,7 @@
 <script src="/js/main.js"></script>
 <script src="/js/dealer.js"></script>
 <script src="/js/otherContact.js"></script>
+<script src="/js/anniversary.js"></script>
 <script>
     @if ($errors->any())
         @foreach ($errors->all() as $error)
