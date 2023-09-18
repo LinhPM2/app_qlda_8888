@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Http\Request;
@@ -9,15 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index()
-    {   if (Auth::check()) {
-        return redirect()->intended(route('admin'));
+    {
+        if (Auth::check()) {
+            return redirect()->intended(route('admin'));
         }
-        return view('auth.login',['title'=>'Trang đăng nhập']);
+        return view('auth.login', ['title' => 'Trang đăng nhập']);
     }
 
     public function store(Request $request)
     {
-        $this->validateWithBag('login',$request, [
+        $this->validateWithBag('login', $request, [
             'email' => 'required|email:filter',
             'password' => 'required'
         ]);
@@ -34,5 +36,12 @@ class LoginController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }
+    public function signout()
+    {
+        if (Auth::check()) {
+            Auth::logout();
+        }
+        return redirect(route('login'));
     }
 }
