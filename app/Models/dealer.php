@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\QueryScopes\SearchScope;
 use Database\Factories\Dealer\DealerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class dealer extends Model
 {
-    use HasFactory;
+    use HasFactory, SearchScope;
 
     protected static function newFactory(): Factory
     {

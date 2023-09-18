@@ -1,9 +1,10 @@
-<?
+<?php
 
 namespace App\Http\Service;
 
 use App\Interfaces\Repositories\IOrderRepository;
 use App\Interfaces\Services\IOrderService;
+use Exception;
 use Illuminate\Http\Request;
 
 class OrderService implements IOrderService
@@ -38,14 +39,14 @@ class OrderService implements IOrderService
         try {
             $this->repo->delete($id);
         } catch (\Throwable $th) {
-            report($th);
+            throw new Exception("Xóa không thành công", 1);
+
         }
     }
-    public function update(Request $req, string $id)
+    public function update(Request $req)
     {
         try {
-            $target = $this->repo->show($id);
-            $target->IDDealer = $req->input("id");
+            $target = $this->repo->show($req->input('id'));
             $target->unit = $req->input("unit");
             $target->quantity = $req->input("quantity");
             $target->notes = $req->input("notes");
@@ -57,9 +58,10 @@ class OrderService implements IOrderService
     public function Show(string $id)
     {
         try {
-            $this->repo->show($id);
+          return  $this->repo->show($id);
         } catch (\Throwable $th) {
             report($th);
         }
     }
+
 }

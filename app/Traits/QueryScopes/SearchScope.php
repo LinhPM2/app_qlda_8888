@@ -43,7 +43,7 @@ trait SearchScope
         }
         $columns = Schema::getColumnListing(app($modelNamespace)->getTable());
         for ($i=0; $i < count($columns) ; $i++) {
-            $res = ($i == 1) ?
+            $res = ($i == 0) ?
                 $res->where(strval($columns[$i]), 'ilike', '%' . strval($searchValue) . '%')
                 : $res->orWhere(strval($columns[$i]), 'ilike', '%' . strval($searchValue) . '%');
         }

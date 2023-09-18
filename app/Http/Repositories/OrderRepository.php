@@ -17,7 +17,10 @@ class OrderRepository implements IOrderRepository
     public function all()
     {
         // return request()->search ? Order::join('dealers', 'orders.IDDealer', '=', 'dealers.id')->searchAll()->select('orders.*', 'dealers.dealerName')->paginate() : Order::paginate();
-        return Order::join('dealers', 'orders.IDDealer', '=', 'dealers.id')->select('orders.*', 'dealers.dealerName')->paginate();
+        return Order::join('dealers', 'orders.IDDealer', '=', 'dealers.id')
+                    ->select('orders.*', 'dealers.dealerName')
+                    ->orderBy('created_at','desc')
+                    ->paginate(10);
     }
     public function create(array $data)
     {
